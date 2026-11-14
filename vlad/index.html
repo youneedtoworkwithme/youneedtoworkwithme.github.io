@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Владислав Гірняк · Гаряча Точка</title>
+
+  <!-- Open Graph / Месенджери (Telegram, Viber, WhatsApp) - Обличчя чітко по центру! -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Владислав Гірняк · Гаряча Точка">
+  <meta property="og:description" content="Оперативно, якісно і вчасно. Працюєм по всій Україні. Рахунок за 15 хвилин.">
+  <meta property="og:image" content="https://youneedtoworkwithme.github.io/vlad/preview.jpg">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:url" content="https://youneedtoworkwithme.github.io/vlad/">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Владислав Гірняк · Гаряча Точка">
+  <meta name="twitter:description" content="Оперативно, якісно і вчасно. Працюєм по всій Україні.">
+  <meta name="twitter:image" content="https://youneedtoworkwithme.github.io/vlad/preview.jpg">
+
+  <link rel="icon" href="https://hot-point.com.ua/image/hp_logo_ua.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand: #F2673A;
+      --brand-glow: rgba(242, 103, 58, 0.35);
+      --brand-ink: #B8431C;
+      --on-brand: #fff;
+      --tint: #FFF0EA;
+      --bg: #141619;
+      --surface: #1e2227;
+      --surface-2: #282d34;
+      --surface-card: rgba(30, 34, 39, 0.85);
+      --line: rgba(255, 255, 255, 0.1);
+      --fg: #F5F5F7;
+      --muted: #9BA1A6;
+      --graphite: #1a1d21;
+      --accent-green: #10b981;
+      --accent-telegram: #229ED9;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Open Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background: var(--bg); color: var(--fg); min-height: 100vh; display: flex; justify-content: center; padding: 12px; }
+
+    .wrap { max-width: 440px; width: 100%; display: flex; flex-direction: column; gap: 14px; padding-bottom: 76px; }
+
+    /* Хедер бренду */
+    .brandbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 18px; background: var(--surface-card); border-radius: var(--radius);
+      border: 1px solid var(--line); backdrop-filter: blur(12px);
+    }
+    .co { display: flex; align-items: center; gap: 12px; }
+    .co-logo { width: 34px; height: 34px; border-radius: 8px; background: var(--brand); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 15px; }
+    .co-name { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.2; }
+    .co-name small { display: block; font-size: 11px; color: var(--muted); font-weight: 400; }
+    .live-badge { font-size: 11px; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 8px; border-radius: 12px; }
+
+    /* Головна картка */
+    .hero-card {
+      background: var(--surface-card); border-radius: var(--radius); border: 1px solid var(--line);
+      padding: 24px 20px; text-align: center; position: relative; overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+    .hero-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 90px;
+      background: linear-gradient(135deg, rgba(242, 103, 58, 0.4), transparent); pointer-events: none;
+    }
+
+    .portrait-wrap { position: relative; width: 130px; height: 130px; margin: 10px auto 14px; }
+    .portrait-ring {
+      position: absolute; inset: -5px; border-radius: 50%;
+      border: 2px dashed var(--brand); animation: rotateRing 20s linear infinite;
+    }
+    @keyframes rotateRing { 100% { transform: rotate(360deg); } }
+
+    .avatar-img {
+      width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+      object-position: 55% 15%; border: 3px solid #fff; box-shadow: 0 8px 20px var(--brand-glow);
+      display: block; position: relative; z-index: 1;
+    }
+
+    .badge-role {
+      display: inline-block; background: var(--tint); color: var(--brand-ink);
+      font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 12px; margin-bottom: 8px;
+    }
+    h1 { font-size: 21px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .slogan { font-size: 13.5px; color: var(--muted); line-height: 1.5; margin-bottom: 20px; }
+    .slogan b { color: var(--brand); }
+
+    /* Кнопки дій */
+    .acts-grid { display: flex; flex-direction: column; gap: 10px; }
+    .btn-act {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface); color: #fff; text-decoration: none; padding: 13px 16px;
+      border-radius: 14px; font-size: 14.5px; font-weight: 600; border: 1px solid var(--line);
+      transition: all 0.2s;
+    }
+    .btn-act:hover, .btn-act:active { background: var(--surface-2); border-color: var(--brand); transform: translateY(-2px); }
+    .act-left { display: flex; align-items: center; gap: 12px; }
+    .act-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .act-title { font-size: 10.5px; color: var(--muted); text-transform: uppercase; font-weight: 700; text-align: left; }
+    .act-val { font-size: 14.5px; color: #fff; font-weight: 700; }
+
+    .btn-vcf {
+      background: linear-gradient(135deg, #F2673A 0%, #D84E23 100%);
+      color: #fff; padding: 15px; border-radius: 14px; font-weight: 700; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 8px 24px var(--brand-glow); border: none; cursor: pointer; margin-top: 6px;
+    }
+    .btn-vcf:hover { opacity: 0.95; transform: scale(1.02); }
+
+    /* 3D СЕКЦІЯ ТА ІНТЕРАКТИВНА ЛЮДИНКА */
+    .sec-3d {
+      background: var(--surface-card); border-radius: var(--radius); border: 1px solid var(--line);
+      padding: 20px 18px; text-align: center; margin-top: 6px;
+    }
+    .sec-3d-head { margin-bottom: 16px; }
+    .sec-3d-head .eyebrow { font-size: 11px; font-weight: 800; color: var(--brand); text-transform: uppercase; letter-spacing: 0.5px; }
+    .sec-3d-head h2 { font-size: 18px; font-weight: 800; color: #fff; margin-top: 2px; }
+    .sec-3d-head p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* Кнопки взаємодії з персонажем */
+    .char-actions {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin-top: 14px;
+    }
+    .char-btn {
+      background: var(--surface); color: #fff; border: 1px solid var(--line);
+      border-radius: 12px; padding: 11px 10px; font-size: 13px; font-weight: 600;
+      display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s;
+    }
+    .char-btn:hover, .char-btn:active { background: var(--surface-2); border-color: var(--brand); transform: scale(1.03); }
+    .char-btn.quiz { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(242, 103, 58, 0.2), rgba(242, 103, 58, 0.05)); border-color: rgba(242, 103, 58, 0.4); color: #FFA07A; justify-content: center; font-weight: 700; }
+    .char-btn.highlight { border-color: rgba(242, 103, 58, 0.4); background: rgba(242, 103, 58, 0.1); }
+    .char-btn .ic { font-size: 17px; }
+
+    /* Шкала настрою та реакцій */
+    .mood-box {
+      margin-top: 16px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px 14px; border: 1px solid var(--line);
+    }
+    .mood-top { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+    .mood-bar { height: 7px; background: #333; border-radius: 4px; overflow: hidden; }
+    .mood-fill { height: 100%; width: 60%; background: linear-gradient(90deg, #F2673A, #10b981); transition: width 0.4s ease; }
+    .mood-quote { font-size: 13px; font-style: italic; color: #fff; margin-top: 8px; min-height: 20px; transition: all 0.3s; }
+
+    /* Таббар внизу */
+    .tabbar {
+      position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
+      width: calc(100% - 24px); max-width: 420px; background: rgba(26, 29, 33, 0.95);
+      backdrop-filter: blur(16px); border-radius: 20px; border: 1px solid var(--line);
+      display: flex; justify-content: space-around; padding: 8px 4px; z-index: 100;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    }
+    .tab-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 10px; transition: all 0.2s; }
+    .tab-item.active, .tab-item:hover { color: var(--brand); background: rgba(242, 103, 58, 0.12); }
+    .tab-item span { font-size: 16px; }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <!-- Шапка бренду -->
+    <header class="brandbar">
+      <div class="co">
+        <div class="co-logo">ГТ</div>
+        <div class="co-name">
+          Гаряча Точка
+          <small>сантехніка • опалення • водопостачання</small>
+        </div>
+      </div>
+      <div class="live-badge">Онлайн</div>
+    </header>
+
+    <!-- Головна картка менеджера -->
+    <section class="hero-card">
+      <div class="portrait-wrap">
+        <div class="portrait-ring"></div>
+        <img src="preview.jpg" alt="Владислав Гірняк" class="avatar-img">
+      </div>
+
+      <div class="badge-role">Менеджер мережі</div>
+      <h1>Владислав Гірняк</h1>
+      <p class="slogan">
+        Оперативно, якісно і вчасно.<br>
+        <b>Працюєм по всій Україні</b> · Львів, Зелена 238
+      </p>
+
+      <!-- Контакти -->
+      <div class="acts-grid">
+        <a href="tel:+380675345941" class="btn-act">
+          <div class="act-left">
+            <div class="act-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">📞</div>
+            <div>
+              <div class="act-title">Київстар</div>
+              <div class="act-val">067 534 59 41</div>
+            </div>
+          </div>
+          <div>➔</div>
+        </a>
+
+        <a href="tel:+380633343654" class="btn-act">
+          <div class="act-left">
+            <div class="act-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">📞</div>
+            <div>
+              <div class="act-title">lifecell</div>
+              <div class="act-val">063 334 36 54</div>
+            </div>
+          </div>
+          <div>➔</div>
+        </a>
+
+        <a href="https://t.me/Manaaggerr03" target="_blank" rel="noopener" class="btn-act">
+          <div class="act-left">
+            <div class="act-icon" style="background: rgba(34, 158, 217, 0.15); color: #38bdf8;">✈️</div>
+            <div>
+              <div class="act-title">Telegram</div>
+              <div class="act-val">@Manaaggerr03</div>
+            </div>
+          </div>
+          <div>➔</div>
+        </a>
+
+        <a href="mailto:HirniakVO@hot-point.com.ua" class="btn-act">
+          <div class="act-left">
+            <div class="act-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">✉️</div>
+            <div>
+              <div class="act-title">Email</div>
+              <div class="act-val" style="font-size: 13px;">HirniakVO@hot-point.com.ua</div>
+            </div>
+          </div>
+          <div>➔</div>
+        </a>
+
+        <!-- Кнопка VCF -->
+        <a href="vlad.vcf" download="Vladyslav_Hirniak.vcf" class="btn-vcf">
+          <span>👤</span> Зберегти контакт у телефон
+        </a>
+      </div>
+    </section>
+
+    <!-- СЕКЦІЯ 3D-ЛЮДИНКИ ТА ІНТЕРАКТИВУ -->
+    <section class="sec-3d">
+      <div class="sec-3d-head">
+        <div class="eyebrow">Інтерактивна модель</div>
+        <h2>Що зробите з менеджером?</h2>
+        <p>Натискайте кнопки нижче, щоб перевірити реакцію моделі!</p>
+      </div>
+
+      <!-- Інтерактивні кнопки -->
+      <div class="char-actions">
+        <button type="button" class="char-btn quiz" onclick="actChar('quiz', 'Перевіримо Ваші знання! Тест для справжніх сантехніків −2 000 грн')">
+          <span class="ic">🎓</span> Тест на профі · Знижка −2 000 грн
+        </button>
+        <button type="button" class="char-btn highlight" onclick="actChar('hug', 'Ох, тепло, наче від теплої підлоги Raftec! 🤗')">
+          <span class="ic">🤗</span> Обійняти
+        </button>
+        <button type="button" class="char-btn highlight" onclick="actChar('kiss', 'Ой... я аж почервонів, як гарячий радіатор! 💋')">
+          <span class="ic">💋</span> Поцілувати в лобик
+        </button>
+        <button type="button" class="char-btn" onclick="actChar('coffee', 'Оце діло! Енергія на 100 прорахунків вперед! ☕')">
+          <span class="ic">☕</span> Дати каву
+        </button>
+        <button type="button" class="char-btn" onclick="actChar('shake', 'Доброго дня! Тисну руку, розрахунок зробимо за 15 хвилин!')">
+          <span class="ic">🤝</span> Потиснути руку
+        </button>
+        <button type="button" class="char-btn" onclick="actChar('five', 'Є контакт! Працюємо чітко й злагоджено! 🙌')">
+          <span class="ic">🙌</span> Дати «п\'ять»
+        </button>
+        <button type="button" class="char-btn" onclick="actChar('dance', 'Оце настрій! Танцюємо, бо всі труби зійшлися за проектом! 🕺')">
+          <span class="ic">🕺</span> Потанцювати
+        </button>
+        <button type="button" class="char-btn" onclick="actChar('selfie', 'Сир! Селфі на фоні нашого шоуруму на Зеленій! 🤳')">
+          <span class="ic">🤳</span> Селфі разом
+        </button>
+        <button type="button" class="char-btn" onclick="actChar('talk', 'Слухаю уважно! Яка площа об\'єкту і скільки точок води? 💬')">
+          <span class="ic">💬</span> Поговорити
+        </button>
+        <button type="button" class="char-btn" onclick="actChar('kick', 'Ай-ай! Моя коліночка! Записую в рахунок моральну шкоду 😅')">
+          <span class="ic">🦵</span> Копнути
+        </button>
+      </div>
+
+      <!-- Шкала настрою -->
+      <div class="mood-box">
+        <div class="mood-top">
+          <span>Рівень тепла:</span>
+          <span id="moodPct">85%</span>
+        </div>
+        <div class="mood-bar">
+          <div class="mood-fill" id="moodFill" style="width: 85%;"></div>
+        </div>
+        <div class="mood-quote" id="charQuote">«Оберіть дію, щоб перевірити реакцію!»</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Меню внизу -->
+  <nav class="tabbar">
+    <a href="#" class="tab-item active"><span>👤</span>Візитка</a>
+    <a href="https://youneedtoworkwithme.github.io/" class="tab-item"><span>👥</span>Менеджери</a>
+    <a href="https://youneedtoworkwithme.github.io/aihotpoint/mm.html" class="tab-item"><span>⚡</span>Hotpoint.ai</a>
+    <a href="https://hot-point.com.ua/" target="_blank" class="tab-item"><span>🏬</span>Магазин</a>
+  </nav>
+
+  <script>
+    let warmth = 85;
+    function actChar(action, quote) {
+      const q = document.getElementById('charQuote');
+      const pct = document.getElementById('moodPct');
+      const fill = document.getElementById('moodFill');
+      
+      if (action === 'kick') warmth = Math.max(20, warmth - 15);
+      else if (action === 'hug' || action === 'kiss') warmth = Math.min(100, warmth + 10);
+      else warmth = Math.min(100, warmth + 5);
+
+      pct.textContent = warmth + '%';
+      fill.style.width = warmth + '%';
+      q.textContent = quote;
+      q.style.transform = 'scale(1.05)';
+      setTimeout(() => q.style.transform = 'scale(1)', 250);
+    }
+  </script>
+</body>
+</html>

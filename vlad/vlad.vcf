@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:Гірняк;Владислав;Олегович;;
+FN;CHARSET=UTF-8:Владислав Гірняк
+ORG;CHARSET=UTF-8:Гаряча Точка
+TITLE;CHARSET=UTF-8:Менеджер
+TEL;TYPE=CELL,VOICE:+380675345941
+TEL;TYPE=WORK,VOICE:+380633343654
+EMAIL;TYPE=INTERNET,WORK:HirniakVO@hot-point.com.ua
+URL:https://youneedtoworkwithme.github.io/vlad/
+X-SOCIALPROFILE;TYPE=telegram:https://t.me/Manaaggerr03
+NOTE;CHARSET=UTF-8:Оперативно, якісно і вчасно. Працюєм по всій Україні.
+ADR;TYPE=WORK;CHARSET=UTF-8:;;вул. Зелена, 238;Львів;;79000;Україна
+END:VCARD
