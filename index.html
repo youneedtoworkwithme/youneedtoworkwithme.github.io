@@ -1,22 +1,213 @@
 <!DOCTYPE html>
-<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Гаряча Точка · Львів, Зелена 238</title>
-<meta property="og:title" content="Гаряча Точка · Львів, Зелена 238"><meta property="og:description" content="Оберіть свого менеджера: сантехніка, опалення, вода, електрика. Рахунок за 15 хвилин.">
-<meta property="og:image" content="https://youneedtoworkwithme.github.io/taras/preview.jpg"><meta name="twitter:card" content="summary_large_image">
-<style>
-:root{--bg:#F4F2F0;--s:#fff;--ink:#1F1F1F;--mu:#5C5C5C;--b:#B8431C}
-@media (prefers-color-scheme: dark){:root{--bg:#161413;--s:#211E1C;--ink:#F3EEEA;--mu:#B5ACA6;--b:#FF9A73}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Open Sans","Segoe UI",Roboto,Arial,sans-serif;padding:24px 16px}
-.w{max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-h1{margin:0 0 4px;font-size:24px}.e{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--b)}
-p{margin:0 0 8px;color:var(--mu)}
-a{display:flex;justify-content:space-between;align-items:center;background:var(--s);border-radius:18px;padding:16px 18px;text-decoration:none;color:var(--ink);font-weight:700;box-shadow:0 10px 30px -14px rgba(60,30,15,.3)}
-a small{display:block;font-weight:600;color:var(--mu);font-size:13px}a span.r{color:var(--b);font-size:20px}
-</style></head><body><div class="w">
-<div class="e">Гаряча Точка · Львів, Зелена 238</div><h1>Оберіть менеджера</h1><p>Рахунок за 15 хвилин. Сантехніка, опалення, вода, електрика.</p>
-<a href="/taras/"><span>Тарас-Борис Левицький<small>Директор магазину</small></span><span class="r">→</span></a>
-<a href="/rostyslav/"><span>Ростислав Медвідь<small>Менеджер</small></span><span class="r">→</span></a>
-<a href="/yurii/"><span>Юрій Паславський<small>Менеджер</small></span><span class="r">→</span></a>
-<a href="/olena/"><span>Олена Павличенко<small>Менеджер</small></span><span class="r">→</span></a>
-<a href="/nataliia/"><span>Наталія Корнійко<small>Менеджер</small></span><span class="r">→</span></a>
-</div></body></html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Гаряча Точка · Львів, Зелена 238 · Менеджери</title>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Гаряча Точка · Оберіть свого менеджера">
+  <meta property="og:description" content="Рахунок за 15 хвилин. Сантехніка, опалення, вода, електрика. Львів, вул. Зелена 238.">
+  <meta property="og:image" content="https://hot-point.com.ua/image/hp_logo_ua.svg">
+  <meta property="og:url" content="https://youneedtoworkwithme.github.io/">
+
+  <link rel="icon" href="https://hot-point.com.ua/image/hp_logo_ua.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand: #F2673A;
+      --brand-glow: rgba(242, 103, 58, 0.4);
+      --brand-ink: #B8431C;
+      --bg: #121417;
+      --surface: #1c2025;
+      --surface-card: rgba(28, 32, 37, 0.9);
+      --surface-hover: #262c33;
+      --line: rgba(255, 255, 255, 0.08);
+      --fg: #F5F5F7;
+      --muted: #9BA1A6;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Open Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background: var(--bg); color: var(--fg); min-height: 100vh; display: flex; justify-content: center; padding: 16px; }
+
+    .wrap { max-width: 480px; width: 100%; display: flex; flex-direction: column; gap: 16px; padding-bottom: 40px; }
+
+    /* Хедер */
+    .brandbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; background: var(--surface-card); border-radius: var(--radius);
+      border: 1px solid var(--line); backdrop-filter: blur(12px);
+    }
+    .co { display: flex; align-items: center; gap: 12px; }
+    .co-logo { width: 38px; height: 38px; border-radius: 10px; background: var(--brand); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 16px; box-shadow: 0 4px 14px var(--brand-glow); }
+    .co-name { font-size: 16px; font-weight: 800; color: #fff; line-height: 1.2; }
+    .co-name small { display: block; font-size: 11px; color: var(--muted); font-weight: 500; }
+    .city-badge { font-size: 11.5px; font-weight: 700; color: #FFA07A; background: rgba(242, 103, 58, 0.15); border: 1px solid rgba(242, 103, 58, 0.3); padding: 4px 10px; border-radius: 12px; }
+
+    /* Інтро */
+    .intro {
+      text-align: center; padding: 18px 12px 6px;
+    }
+    .intro .eyebrow { font-size: 12px; font-weight: 800; color: var(--brand); text-transform: uppercase; letter-spacing: 0.5px; }
+    .intro h1 { font-size: 24px; font-weight: 800; color: #fff; margin-top: 4px; }
+    .intro p { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+    /* Список менеджерів */
+    .managers-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .m-card {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface-card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 14px 18px; text-decoration: none; color: #fff; transition: all 0.25s ease;
+      position: relative; overflow: hidden;
+    }
+    .m-card:hover, .m-card:active {
+      background: var(--surface-hover); border-color: var(--brand); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px var(--brand-glow);
+    }
+
+    .m-left { display: flex; align-items: center; gap: 14px; }
+    .m-avatar {
+      width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--brand); box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .m-name { font-size: 15.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .m-role { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .m-badge {
+      display: inline-block; font-size: 10.5px; font-weight: 700; color: #34d399;
+      background: rgba(16, 185, 129, 0.12); padding: 2px 7px; border-radius: 6px; margin-left: 6px;
+    }
+
+    .m-arrow {
+      width: 32px; height: 32px; border-radius: 50%; background: rgba(255, 255, 255, 0.05);
+      display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 14px;
+      transition: all 0.2s;
+    }
+    .m-card:hover .m-arrow { background: var(--brand); color: #fff; transform: translateX(3px); }
+
+    /* Додаткові посилання */
+    .service-banner {
+      background: linear-gradient(135deg, rgba(242, 103, 58, 0.15) 0%, rgba(242, 103, 58, 0.05) 100%);
+      border: 1px solid rgba(242, 103, 58, 0.3); border-radius: var(--radius); padding: 18px;
+      display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff;
+      margin-top: 6px; transition: all 0.2s;
+    }
+    .service-banner:hover { border-color: var(--brand); transform: translateY(-2px); }
+    .sb-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+    .sb-sub { font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <!-- Шапка -->
+    <header class="brandbar">
+      <div class="co">
+        <div class="co-logo">ГТ</div>
+        <div class="co-name">
+          Гаряча Точка
+          <small>опалення • сантехніка • водопостачання</small>
+        </div>
+      </div>
+      <div class="city-badge">Львів, Зелена 238</div>
+    </header>
+
+    <!-- Заголовок -->
+    <div class="intro">
+      <div class="eyebrow">Команда магазину</div>
+      <h1>Оберіть свого менеджера</h1>
+      <p>Швидкий точний прорахунок за 15 хвилин. Комплектація об'єктів будь-якої складності.</p>
+    </div>
+
+    <!-- Список візиток -->
+    <div class="managers-list">
+      <!-- Владислав Гірняк (НОВИЙ) -->
+      <a href="https://youneedtoworkwithme.github.io/vlad/" class="m-card">
+        <div class="m-left">
+          <img src="vlad/preview.jpg" alt="Владислав Гірняк" class="m-avatar" style="object-position: 55% 15%;">
+          <div>
+            <div class="m-name">Владислав Гірняк <span class="m-badge">Новий</span></div>
+            <div class="m-role">Менеджер · Працюєм по всій Україні</div>
+          </div>
+        </div>
+        <div class="m-arrow">➔</div>
+      </a>
+
+      <!-- Тарас-Борис Левицький -->
+      <a href="https://youneedtoworkwithme.github.io/taras/" class="m-card">
+        <div class="m-left">
+          <div class="m-avatar" style="border-color: #3b82f6;">ТЛ</div>
+          <div>
+            <div class="m-name">Тарас-Борис Левицький</div>
+            <div class="m-role">Директор магазину на Зеленій</div>
+          </div>
+        </div>
+        <div class="m-arrow">➔</div>
+      </a>
+
+      <!-- Ростислав Медвідь -->
+      <a href="https://youneedtoworkwithme.github.io/rostyslav/" class="m-card">
+        <div class="m-left">
+          <div class="m-avatar">РМ</div>
+          <div>
+            <div class="m-name">Ростислав Медвідь</div>
+            <div class="m-role">Менеджер систем опалення та води</div>
+          </div>
+        </div>
+        <div class="m-arrow">➔</div>
+      </a>
+
+      <!-- Юрій Паславський -->
+      <a href="https://youneedtoworkwithme.github.io/yurii/" class="m-card">
+        <div class="m-left">
+          <div class="m-avatar">ЮП</div>
+          <div>
+            <div class="m-name">Юрій Паславський</div>
+            <div class="m-role">Менеджер проєктів та комплектації</div>
+          </div>
+        </div>
+        <div class="m-arrow">➔</div>
+      </a>
+
+      <!-- Олена Павличенко -->
+      <a href="https://youneedtoworkwithme.github.io/olena/" class="m-card">
+        <div class="m-left">
+          <div class="m-avatar">ОП</div>
+          <div>
+            <div class="m-name">Олена Павличенко</div>
+            <div class="m-role">Менеджер з підбору сантехніки</div>
+          </div>
+        </div>
+        <div class="m-arrow">➔</div>
+      </a>
+
+      <!-- Наталія Корнійко -->
+      <a href="https://youneedtoworkwithme.github.io/nataliia/" class="m-card">
+        <div class="m-left">
+          <div class="m-avatar">НК</div>
+          <div>
+            <div class="m-name">Наталія Корнійко</div>
+            <div class="m-role">Менеджер · Якісний підхід у підборі</div>
+          </div>
+        </div>
+        <div class="m-arrow">➔</div>
+      </a>
+    </div>
+
+    <!-- Банер Hotpoint.ai -->
+    <a href="https://youneedtoworkwithme.github.io/aihotpoint/mm.html" class="service-banner">
+      <div>
+        <div class="sb-title">⚡ Hotpoint.ai · Прорахунок ШІ</div>
+        <div class="sb-sub">Автоматичний підбір опалення та специфікацій</div>
+      </div>
+      <div>➔</div>
+    </a>
+  </div>
+
+</body>
+</html>
