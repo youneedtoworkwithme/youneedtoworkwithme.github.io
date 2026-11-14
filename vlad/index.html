@@ -5693,7 +5693,7 @@ function build3D(stage) {
         if (o.isBone) bones[o.name] = o;
       });
       root.updateMatrixWorld(true);
-      const bp = bones["mixamorig:Spine"] ? "mixamorig:" : "";
+      const bp = bones["mixamorig:Spine"] ? "mixamorig:" : (bones["mixamorigSpine"] ? "mixamorig" : "");
       const armOff = bp ? 1.18 : 0.52;
       let skelH = 0;
       const headEnd = bones[bp + "HeadTop_End"] || bones[bp + "Head"];
