@@ -5675,12 +5675,6 @@ function build3D(stage) {
     if (!T.GLTFLoader) return;
     new T.GLTFLoader().load(url, gltf => {
       const m = gltf.scene;
-      m.updateMatrixWorld(true);
-      const box = new T.Box3().setFromObject(m);
-      const h = box.max.y - box.min.y || 1.75;
-      const sc = targetH / h;
-      m.scale.setScalar(sc);
-      m.position.y = -box.min.y * sc;
       const root = new T.Group(); root.add(m);
       const bones = {};
       m.traverse(o => {
@@ -5690,8 +5684,9 @@ function build3D(stage) {
           if (isMan && !CONFIG.female) {
             if (/headwear/i.test(o.name)) o.visible = false;
             if (CONFIG.slug === "vlad" && /beard/i.test(o.name)) o.visible = false;
-            if (CONFIG.slug === "vlad" && /outfit_top/i.test(o.name) && o.material) {
-              o.material.color.setHex(0xd4b496);
+            if (o.name === "Mesh" && o.material) { o.material.color.setHex(0x2e1f16); }
+            if (/outfit_top/i.test(o.name) && o.material) {
+              o.material.color.setHex(CONFIG.slug === "vlad" ? 0xc49f7e : 0x7a8a9e);
             }
           }
         }
@@ -5700,6 +5695,24 @@ function build3D(stage) {
       root.updateMatrixWorld(true);
       const bp = bones["mixamorig:Spine"] ? "mixamorig:" : "";
       const armOff = bp ? 1.18 : 0.52;
+      let skelH = 0, minY = 0;
+      const headEnd = bones[bp + "HeadTop_End"] || bones[bp + "Head"];
+      const footB = bones[bp + "LeftFoot"] || bones[bp + "LeftLeg"];
+      if (headEnd && footB) {
+        const hv = new T.Vector3(), fv = new T.Vector3();
+        headEnd.getWorldPosition(hv); footB.getWorldPosition(fv);
+        skelH = Math.abs(hv.y - fv.y) * 1.07;
+        minY = Math.min(hv.y, fv.y) - 0.07;
+      }
+      if (!skelH || skelH < 0.001) {
+        const box = new T.Box3().setFromObject(m);
+        skelH = box.max.y - box.min.y || 1.75;
+        minY = box.min.y;
+      }
+      const sc = targetH / skelH;
+      m.scale.setScalar(sc);
+      m.position.y = -minY * sc;
+      root.updateMatrixWorld(true);
       const rest = {}, pq = {}, pqi = {};
       for (const k of ["Spine", "Spine1", "Neck", "Head", "LeftArm", "LeftForeArm", "RightArm", "RightForeArm", "LeftUpLeg", "LeftLeg", "RightUpLeg", "RightLeg"]) {
         const b = bones[bp + k]; if (!b) continue;
@@ -5708,17 +5721,6 @@ function build3D(stage) {
         pqi[k] = pq[k].clone().invert();
       }
       const headNode = bones[bp + "Head"] || m;
-      if (isMan && !CONFIG.female && bones.Head) {
-        const hMat = new T.MeshStandardMaterial({ color: 0x3b2a1e, roughness: 0.72, metalness: 0.05 });
-        const hairG = new T.Group();
-        const cap = new T.Mesh(new T.SphereGeometry(0.112, 24, 18, 0, Math.PI * 2, 0, Math.PI * 0.56), hMat);
-        cap.scale.set(0.96, 0.98, 1.06); cap.position.set(0, 0.078, -0.014); hairG.add(cap);
-        const top = new T.Mesh(new T.SphereGeometry(0.088, 20, 14), hMat);
-        top.scale.set(1.02, 0.45, 1.15); top.position.set(0.008, 0.142, 0.015); top.rotation.z = -0.08; hairG.add(top);
-        const back = new T.Mesh(new T.SphereGeometry(0.095, 18, 14), hMat);
-        back.scale.set(0.95, 0.75, 0.85); back.position.set(0, 0.055, -0.052); hairG.add(back);
-        bones.Head.add(hairG);
-      }
       const blushM = new T.MeshBasicMaterial({ color: 0xff6b7a, transparent: true, opacity: 0, depthWrite: false });
       const lHold = new T.Group(), rHold = new T.Group();
       const lh = bones[bp + "LeftHand"], rh = bones[bp + "RightHand"];
