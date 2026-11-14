@@ -1375,11 +1375,11 @@ const ACTIONS = {
           [["v", 1.5, 2.7, "Вітаю! Я до Вас по котел"], ["m", 2.8, 4.0, "Вітаю! Вже уявляю Вашу котельню"], ["m", 4.1, 5.4, "Кланяюсь клієнту!"]]],
     fx: v => v === 1 ? [[2.2, "c", "ТРУСЬ!"]] : [], sfx: v => [[.1, "jingle"], [1.7, "ding"], [2.0, "ding2"]].concat(v === 1 ? [[2.1, "boing"]] : v === 2 ? [[4.2, "blush"]] : []) },
 
-  kick: { D: () => 6.2, dist: () => .78,
+  kick: { D: () => 6.2, dist: () => .72,
     f(t, M, V, v) { const w = P(t, 1.0, 1.3, 1.3, 1.45), k = P(t, 1.3, 1.45, 1.65, 2.0);
-      V.rhx = .55 * w - 1.15 * k; V.rkn = .9 * w + .1 * k; V.tx = -.12 * k; V.lsz = .3 * k; V.rsz = -.3 * k;
-      if (v === 0) { const h = hopOn(M, t, 1.45, 4.4); M.hz = .08 * S(t * 9) * h; }
-      if (v === 1) { const d = P(t, 1.15, 1.35, 3.8, 4.4); M.x = .4 * d; M.y = .14 * P(t, 1.15, 1.25, 1.35, 1.55); M.lsz = .7 * d; M.rsz = -.7 * d; M.mouth = .35 * d;
+      V.rhx = .65 * w - 1.35 * k; V.rkn = 1.0 * w + .15 * k; V.tx = -.22 * k; V.ty = .25 * k; V.lsz = .35 * k; V.rsz = -.35 * k;
+      if (v === 0) { const h = hopOn(M, t, 1.45, 4.4); M.hz = .08 * S(t * 9) * h; M.tx = .24 * P(t, 1.45, 1.55, 1.9, 2.3); }
+      if (v === 1) { const d = P(t, 1.15, 1.35, 3.8, 4.4); M.x = .42 * d; M.y = .14 * P(t, 1.15, 1.25, 1.35, 1.55); M.lsz = .7 * d; M.rsz = -.7 * d; M.mouth = .35 * d;
         const st = P(t, 1.5, 1.7, 2.4, 2.8); V.tz = -.22 * st; V.hz = -.2 * st; V.lsz += .5 * st; }
       if (v === 2) { V.rhx *= 1 - R(t, 1.55, 1.65); hopOn(V, t, 1.6, 4.4, "r"); M.hx = .12 * P(t, 1.7, 1.9, 3.2, 3.6); } },
     say: [[["m", 1.6, 3.1, "Ай-ай-ай! Моя коліночка!"], ["v", 3.2, 4.2, "Пробач, рефлекс!"], ["m", 4.3, 5.8, "Записую в рахунок: моральна шкода!"]],
@@ -1390,14 +1390,14 @@ const ACTIONS = {
     sfx: v => [[.05, "sneak"]].concat(v === 0 ? [[1.45, "thud"], [1.5, "boing"], [1.9, "hop"], [2.25, "hop"], [2.6, "hop"], [2.95, "hop"]]
            : v === 1 ? [[1.25, "whoosh"], [1.6, "boing"]] : [[1.55, "clang"], [1.95, "hop"], [2.3, "hop"], [2.65, "hop"]]) },
 
-  slap: { D: v => v === 2 ? 6.6 : 5.8, dist: () => .74,
-    f(t, M, V, v) { const up = P(t, 1.0, 1.4, 1.5, 1.6), sw = R(t, 1.45, 1.6) * (1 - R(t, 2.0, 2.5)) * (v === 1 ? .55 : 1);
-      V.rsx = -.9 * (up + sw); V.rsz = -1.2 * up + .55 * sw; V.rel = -.3 * (up + sw);
-      if (v === 0) { const h = P(t, 1.56, 1.64, 2.3, 2.9); M.hy = -.75 * h; M.hz = -.18 * h; M.ty = -.15 * h; M.blush = P(t, 1.6, 1.7, 4.6, 5.2); M.mouth = .5 * h; M.gl = P(t, 1.58, 1.75, 2.4, 2.9); }
-      if (v === 1) { const b = P(t, 1.25, 1.42, 2.8, 3.3); M.lsx = -1.5 * b; M.lel = -1.5 * b; M.lsz = -.25 * b; M.mouth = .3 * b; M.hy = .1 * b; }
+  slap: { D: v => v === 2 ? 6.6 : 5.8, dist: () => .62,
+    f(t, M, V, v) { const up = P(t, 1.0, 1.38, 1.48, 1.6), sw = R(t, 1.44, 1.58) * (1 - R(t, 2.0, 2.45)) * (v === 1 ? .55 : 1);
+      V.rsx = -1.48 * (up + sw * .85); V.rsz = -1.05 * up + .65 * sw; V.rel = -.45 * up - .2 * sw; V.ty = -.42 * up + .48 * sw;
+      if (v === 0) { const h = P(t, 1.55, 1.63, 2.3, 2.9); M.hy = -.88 * h; M.hz = -.25 * h; M.hx = -.12 * h; M.ty = -.25 * h; M.blush = P(t, 1.6, 1.7, 4.6, 5.2); M.mouth = .5 * h; M.gl = P(t, 1.58, 1.75, 2.4, 2.9); }
+      if (v === 1) { const b = P(t, 1.25, 1.42, 2.8, 3.3); M.lsx = -1.65 * b; M.lel = -1.55 * b; M.lsz = -.25 * b; M.mouth = .3 * b; M.hy = .12 * b; }
       if (v === 2) { const sw2 = R(t, 2.35, 2.5) * (1 - R(t, 2.9, 3.3)), up2 = P(t, 2.0, 2.3, 2.35, 2.45);
-        V.lsx = -.9 * (up2 + sw2); V.lsz = 1.2 * up2 - .55 * sw2; V.lel = -.3 * (up2 + sw2);
-        const h1 = P(t, 1.56, 1.64, 2.2, 2.45), h2 = P(t, 2.46, 2.54, 3.2, 3.8); M.hy = -.75 * h1 + .75 * h2; M.hz = -.18 * h1 + .18 * h2;
+        V.lsx = -1.48 * (up2 + sw2 * .85); V.lsz = 1.05 * up2 - .65 * sw2; V.lel = -.45 * up2 - .2 * sw2; V.ty += .42 * up2 - .48 * sw2;
+        const h1 = P(t, 1.55, 1.63, 2.2, 2.45), h2 = P(t, 2.46, 2.54, 3.2, 3.8); M.hy = -.88 * h1 + .88 * h2; M.hz = -.25 * h1 + .25 * h2; M.ty = -.22 * h1 + .22 * h2;
         M.blush = P(t, 1.6, 1.7, 5.4, 6.0); M.mouth = .5 * (h1 + h2); } },
     say: [[["m", 2.3, 3.6, "Ой! Аж окуляри злетіли!"], ["v", 3.7, 4.5, "Щоб не спав!"], ["m", 4.6, 5.6, "Друга щока для постійних клієнтів"]],
           [["m", 1.6, 2.9, "Блок! Я на роботі не розслабляюсь"], ["v", 3.0, 4.0, "Ну Ви й спритний!"], ["m", 4.1, 5.5, "Краще потисніть руку!"]],
@@ -1405,9 +1405,9 @@ const ACTIONS = {
     fx: v => v === 0 ? [[1.58, "m", "ЛЯП!", .5]] : v === 1 ? [[1.55, "m", "БЛОК!", .5]] : [[1.58, "m", "ЛЯП!", .5], [2.48, "m", "ЛЯП!", -.5]],
     sfx: v => [[.2, "roll"]].concat(v === 0 ? [[1.58, "smack"], [1.7, "whistle"], [2.35, "wahwah"]] : v === 1 ? [[1.55, "block"], [2.0, "ding"]] : [[1.58, "smack"], [2.48, "smack"], [2.7, "whistle"], [3.2, "wahwah"]]) },
 
-  hug: { D: () => 6.0, dist: v => v === 2 ? .45 : .5,
+  hug: { D: () => 6.0, dist: v => v === 2 ? .42 : .46,
     f(t, M, V, v) { const h = P(t, 1.1, 1.6, 4.1, 4.6), amp = v === 1 ? .16 : .07;
-      for (const X of [M, V]) { X.lsx = X.rsx = -1.25 * h; X.lsz = -.6 * h; X.rsz = .6 * h; X.lel = X.rel = -1.45 * h; X.tz = S(t * 3) * amp * h; X.tx = .05 * h; }
+      for (const X of [M, V]) { X.lsx = X.rsx = -1.35 * h; X.lsz = -.35 * h; X.rsz = .35 * h; X.lel = X.rel = -1.35 * h; X.tz = S(t * 3) * amp * h; X.tx = .08 * h; }
       M.blush = .7 * h;
       if (v === 2) { const l = P(t, 2.0, 2.4, 3.6, 4.0); V.y = .2 * l; V.lkn = V.rkn = .9 * l; V.lhx = V.rhx = -.2 * l; M.tx = -.12 * l; M.mouth = .5 * l; } },
     say: [[["v", 1.7, 3.0, "Дякую, що все підібрали!"], ["m", 3.1, 4.6, "Ох, тепло, як від теплої підлоги!"]],
@@ -1507,9 +1507,9 @@ const ACTIONS = {
     fx: v => v === 1 ? [[2.5, "f"], [4.6, "f"]] : [[2.5, "f"]],
     sfx: v => v === 1 ? [[2.5, "shutter"], [4.6, "shutter"]] : [[2.5, "shutter"], [2.7, "jingle"]] },
 
-  kiss: { D: () => 6.4, dist: () => .42,
+  kiss: { D: () => 6.4, dist: () => .46,
     f(t, M, V, v) { const k = P(t, 1.0, 1.6, 3.0, 3.6);
-      V.tx = .28 * k; V.hx = .38 * k; V.lsx = V.rsx = -1.0 * k; V.lel = V.rel = -.6 * k; V.lsz = -.25 * k; V.rsz = .25 * k;
+      V.tx = .22 * k; V.hx = .25 * k; V.lsx = V.rsx = -.85 * k; V.lel = V.rel = -.9 * k; V.lsz = -.2 * k; V.rsz = .2 * k;
       M.hx = .22 * k; M.blush = P(t, 2.0, 2.2, 5.4, 6.0); M.mouth = .15 * k;
       if (v === 0) { M.y = .05 * P(t, 3.7, 3.9, 4.1, 4.4); }
       if (v === 1) { const h = P(t, 3.2, 3.5, 5.2, 5.6); M.lsx = M.rsx = -1.35 * h; M.lel = M.rel = -2.1 * h; M.lsz = -.35 * h; M.rsz = .35 * h; M.hx = .3 * h; }
@@ -1592,31 +1592,42 @@ Object.assign(SFX, {
 function sfx(name, delay = 0) { if (!soundOn || !ac() || !SFX[name]) return; try { SFX[name](AC.currentTime + delay); } catch (e) {} }
 
 let VOICES = [];
-function loadVoices() { try { VOICES = speechSynthesis.getVoices() || []; } catch (e) { VOICES = []; } }
-try { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; } catch (e) {}
+function loadVoices() { try { VOICES = (window.speechSynthesis && speechSynthesis.getVoices()) || []; } catch (e) { VOICES = []; } }
+try { loadVoices(); if (window.speechSynthesis) speechSynthesis.onvoiceschanged = loadVoices; } catch (e) {}
 const MALE = /ostap|остап|dmytro|male|чолов|anatol|taras|andriy|pavlo/i, FEMALE = /polina|поліна|lesya|леся|female|жін|natalia|oksana|olena|google/i;
 function pickVoice(who) {
   const mm = who === "m" && !CONFIG.female, fm = who === "m" && CONFIG.female;
-  const uk = VOICES.filter(v => /^uk/i.test(v.lang)); if (!uk.length) return null;
+  const uk = VOICES.filter(v => /^uk/i.test(v.lang));
+  if (!uk.length) return { v: null, pitch: mm ? .85 : (fm ? 1.05 : 1.18) };
   const want = mm ? MALE : FEMALE, other = mm ? FEMALE : MALE;
   const exact = uk.find(v => want.test(v.name) && !(mm && FEMALE.test(v.name) && !MALE.test(v.name)));
   if (exact) return { v: exact, pitch: 1 };
   const v = uk.find(v => !other.test(v.name)) || uk[0];
-  const isFem = FEMALE.test(v.name) || !MALE.test(v.name);   // most phones ship only a female Ukrainian voice
-  return { v, pitch: mm ? (isFem ? .55 : 1) : (fm ? (isFem ? .95 : 1.3) : (isFem ? 1.15 : 1.6)) };
+  const isFem = FEMALE.test(v.name) || !MALE.test(v.name);
+  return { v, pitch: mm ? (isFem ? .62 : 1) : (fm ? (isFem ? .95 : 1.3) : (isFem ? 1.15 : 1.55)) };
 }
 const clean = s => s.replace(/[^\p{L}\p{N}\s.,!?'’…-]/gu, "").trim();
+let SPEAK_TM = null;
 function speak(who, text) {
   if (!soundOn) return;
   const line = clean(text); if (!line) return;
-  try { const ss = window.speechSynthesis; if (!ss) return; if (!VOICES.length) loadVoices();
-    const p = pickVoice(who); if (!p) return;
-    const u = new SpeechSynthesisUtterance(line); u.voice = p.v; u.lang = p.v.lang; u.pitch = p.pitch; u.rate = who === "m" ? .98 : 1.05; u.volume = 1;
-    u.onend = u.onerror = () => { SPEAKING = false; }; SPEAKING = true;
-    ss.cancel(); ss.speak(u); } catch (e) { SPEAKING = false; }
+  try {
+    const ss = window.speechSynthesis;
+    if (!ss) { sfx(who === "m" ? "ding" : "ding2", 0); return; }
+    if (!VOICES.length) loadVoices();
+    const p = pickVoice(who);
+    const u = new SpeechSynthesisUtterance(line);
+    if (p.v) { u.voice = p.v; u.lang = p.v.lang; } else { u.lang = "uk-UA"; }
+    u.pitch = p.pitch; u.rate = who === "m" ? .98 : 1.05; u.volume = 1;
+    u.onend = u.onerror = () => { SPEAKING = false; };
+    SPEAKING = true;
+    clearTimeout(SPEAK_TM);
+    if (ss.speaking || ss.pending) ss.cancel();
+    SPEAK_TM = setTimeout(() => { try { ss.resume(); ss.speak(u); } catch (e) { SPEAKING = false; } }, 20);
+  } catch (e) { SPEAKING = false; }
 }
 let SPEAKING = false;
-function hush() { SPEAKING = false;  try { window.speechSynthesis && speechSynthesis.cancel(); } catch (e) {} }
+function hush() { SPEAKING = false; clearTimeout(SPEAK_TM); try { window.speechSynthesis && speechSynthesis.cancel(); } catch (e) {} }
 
 /* ---------- secret counter ---------- */
 const DONE = {};
@@ -1633,7 +1644,9 @@ function play(name) {
   const def = ACTIONS[name], v = (DONE[name] || 0) % 3;
   cur = { name, def, v, D: def.D(v), dist: def.dist(v), t0: performance.now() / 1000, fx: def.fx(v).map(f => ({ f, done: false })),
     lines: def.say[v].map(([w, a, b, text]) => ({ w, a, b, text, spoken: false })) };
-  ac(); hush(); def.sfx(v).forEach(([d, n]) => sfx(n, d));
+  ac(); hush();
+  try { const ss = window.speechSynthesis; if (ss && soundOn) { loadVoices(); ss.resume(); const w = new SpeechSynthesisUtterance(" "); w.lang = "uk-UA"; w.volume = 0; ss.speak(w); } } catch (e) {}
+  def.sfx(v).forEach(([d, n]) => sfx(n, d));
   DONE[name] = (DONE[name] || 0) + 1; renderSecret();
   if (name === "quiz") { cur.holdAt = 1.6; QZ.last = null; setTimeout(quizOpen, 1500); }
   document.querySelectorAll("#acts [data-a]").forEach(b => { b.disabled = b.dataset.a !== name; b.setAttribute("aria-pressed", b.dataset.a === name); });
@@ -1760,8 +1773,19 @@ function build3D(stage) {
     J.rHold = new T.Group(); J.rHold.position.y = -.33; J.rEl.add(J.rHold);
     return J;
   }
-  const MAN = person(CONFIG.female ? { skin: 0xf1c6ad, shirt: 0xf4f1ea, pants: 0x34405a, shoe: 0x2b2b2b, hair: 0xd9c08a, female: true, longSleeve: true, badge: true } : { skin: 0xf0c2a4, shirt: 0xc4a07f, pants: 0x4f6382, shoe: 0x2b2b2b, hair: 0x5e4838, glasses: !!CONFIG.glasses3d, badge: true });
-  const VIS = person({ skin: 0xf1c6ad, shirt: 0xd9677f, pants: 0x34405a, shoe: 0xffffff, hair: 0x6a3d22, longSleeve: true, female: true, scale: .95 });
+  // Studio environment map for photorealistic PBR lighting on GLB skin, hair, eyes, clothes
+  try {
+    const pmrem = new T.PMREMGenerator(renderer);
+    const envScene = new T.Scene(); envScene.background = new T.Color(0xf6efe9);
+    envScene.add(new T.Mesh(new T.BoxGeometry(10, 10, 10), new T.MeshBasicMaterial({ color: 0xf7eee6, side: T.BackSide })));
+    const panel = new T.Mesh(new T.PlaneGeometry(5, 5), new T.MeshBasicMaterial({ color: 0xffffff, side: T.DoubleSide }));
+    panel.position.set(2.5, 4, 3); panel.lookAt(0, 0, 0); envScene.add(panel);
+    scene.environment = pmrem.fromScene(envScene, 0.04).texture;
+    pmrem.dispose();
+  } catch (e) {}
+
+  let MAN = person(CONFIG.female ? { skin: 0xf1c6ad, shirt: 0xf4f1ea, pants: 0x34405a, shoe: 0x2b2b2b, hair: 0xd9c08a, female: true, longSleeve: true, badge: true } : { skin: 0xefc0a2, shirt: 0xc49f7e, pants: 0x3f5370, shoe: 0x24262b, hair: 0x4e392b, glasses: !!CONFIG.glasses3d, badge: true });
+  let VIS = person({ skin: 0xf1c6ad, shirt: 0xd9677f, pants: 0x34405a, shoe: 0xffffff, hair: 0x6a3d22, longSleeve: true, female: true, scale: .95 });
   scene.add(MAN.root, VIS.root); VIS.root.position.x = -4;
   function mkCup() { const g = new T.Group(); const c = new T.Mesh(new T.CylinderGeometry(.036, .03, .09, 28), M_(0xffffff, .35)); c.castShadow = true; g.add(c);
     const top = new T.Mesh(new T.CircleGeometry(.032, 24), M_(0x4a2c1a, .3)); top.rotation.x = -Math.PI / 2; top.position.y = .041; g.add(top);
@@ -1782,8 +1806,99 @@ function build3D(stage) {
     const L = M.receipt || 0; receipt.visible = L > .01; receipt.scale.y = Math.max(.001, L);
     if (MAN.eyesClosed) MAN.eyesClosed.visible = (M.blink || 0) > .5; }
 
+  // Load real sculpted 3D human models (Ready Player Me male & Mixamo female)
+  function loadGLBChar(url, targetH, isMan, cb) {
+    if (!T.GLTFLoader) return;
+    new T.GLTFLoader().load(url, gltf => {
+      const m = gltf.scene;
+      m.updateMatrixWorld(true);
+      const box = new T.Box3().setFromObject(m);
+      const h = box.max.y - box.min.y || 1.75;
+      const sc = targetH / h;
+      m.scale.setScalar(sc);
+      m.position.y = -box.min.y * sc;
+      const root = new T.Group(); root.add(m);
+      const bones = {};
+      m.traverse(o => {
+        if (o.isMesh) {
+          o.castShadow = true; o.receiveShadow = true; o.frustumCulled = false;
+          if (o.material) { o.material = o.material.clone(); o.material.envMapIntensity = 0.9; }
+          if (isMan && !CONFIG.female) {
+            if (/headwear/i.test(o.name)) o.visible = false;
+            if (CONFIG.slug === "vlad" && /beard/i.test(o.name)) o.visible = false;
+            if (CONFIG.slug === "vlad" && /outfit_top/i.test(o.name) && o.material) {
+              o.material.color.setHex(0xd4b496);
+            }
+          }
+        }
+        if (o.isBone) bones[o.name] = o;
+      });
+      root.updateMatrixWorld(true);
+      const bp = bones["mixamorig:Spine"] ? "mixamorig:" : "";
+      const armOff = bp ? 1.18 : 0.52;
+      const rest = {}, pq = {}, pqi = {};
+      for (const k of ["Spine", "Spine1", "Neck", "Head", "LeftArm", "LeftForeArm", "RightArm", "RightForeArm", "LeftUpLeg", "LeftLeg", "RightUpLeg", "RightLeg"]) {
+        const b = bones[bp + k]; if (!b) continue;
+        rest[k] = b.quaternion.clone();
+        pq[k] = new T.Quaternion(); b.parent.getWorldQuaternion(pq[k]);
+        pqi[k] = pq[k].clone().invert();
+      }
+      const headNode = bones[bp + "Head"] || m;
+      if (isMan && !CONFIG.female && bones.Head) {
+        const hMat = new T.MeshStandardMaterial({ color: 0x3b2a1e, roughness: 0.72, metalness: 0.05 });
+        const hairG = new T.Group();
+        const cap = new T.Mesh(new T.SphereGeometry(0.112, 24, 18, 0, Math.PI * 2, 0, Math.PI * 0.56), hMat);
+        cap.scale.set(0.96, 0.98, 1.06); cap.position.set(0, 0.078, -0.014); hairG.add(cap);
+        const top = new T.Mesh(new T.SphereGeometry(0.088, 20, 14), hMat);
+        top.scale.set(1.02, 0.45, 1.15); top.position.set(0.008, 0.142, 0.015); top.rotation.z = -0.08; hairG.add(top);
+        const back = new T.Mesh(new T.SphereGeometry(0.095, 18, 14), hMat);
+        back.scale.set(0.95, 0.75, 0.85); back.position.set(0, 0.055, -0.052); hairG.add(back);
+        bones.Head.add(hairG);
+      }
+      const blushM = new T.MeshBasicMaterial({ color: 0xff6b7a, transparent: true, opacity: 0, depthWrite: false });
+      const lHold = new T.Group(), rHold = new T.Group();
+      const lh = bones[bp + "LeftHand"], rh = bones[bp + "RightHand"];
+      if (lh) { lHold.position.set(0, .06, .03); lh.add(lHold); } else root.add(lHold);
+      if (rh) { rHold.position.set(0, .06, .03); rh.add(rHold); } else root.add(rHold);
+      cb({ isGLB: true, bp, armOff, root, head: headNode, bones, rest, pq, pqi, blushM, lHold, rHold });
+    }, undefined, err => console.warn("GLB fallback:", err));
+  }
+  loadGLBChar(CONFIG.female ? "../models/female.glb" : "../models/male.glb", 1.78, true, ch => {
+    ch.root.position.copy(MAN.root.position); ch.root.rotation.copy(MAN.root.rotation);
+    ch.rHold.add(cupM); ch.lHold.add(tablet);
+    scene.remove(MAN.root); scene.add(ch.root); MAN = ch;
+  });
+  loadGLBChar("../models/female.glb", 1.66, false, ch => {
+    ch.root.position.copy(VIS.root.position); ch.root.rotation.copy(VIS.root.rotation);
+    ch.rHold.add(cupV); ch.rHold.add(phone);
+    scene.remove(VIS.root); scene.add(ch.root); VIS = ch;
+  });
+
+  const _eu = new T.Euler(), _q1 = new T.Quaternion(), _q2 = new T.Quaternion();
+  function rotBone(J, name, rx, ry, rz) {
+    const b = J.bones[J.bp + name]; if (!b || !J.rest[name]) return;
+    _eu.set(rx, ry, rz, "XYZ"); _q1.setFromEuler(_eu);
+    _q2.copy(J.pqi[name]).multiply(_q1).multiply(J.pq[name]).multiply(J.rest[name]);
+    b.quaternion.copy(_q2);
+  }
   function pose(J, p) {
     J.root.position.set(p.x || 0, p.y || 0, 0); J.root.rotation.y = p.ry || 0;
+    if (J.isGLB) {
+      const ao = J.armOff || 0.52;
+      rotBone(J, "Spine", (p.tx || 0) * .6, (p.ty || 0) * .6, (p.tz || 0) * .6);
+      rotBone(J, "Spine1", (p.tx || 0) * .4, (p.ty || 0) * .4, (p.tz || 0) * .4);
+      rotBone(J, "Head", p.hx || 0, p.hy || 0, p.hz || 0);
+      rotBone(J, "LeftArm", p.lsx || 0, 0, (p.lsz || 0) - ao);
+      rotBone(J, "RightArm", p.rsx || 0, 0, (p.rsz || 0) + ao);
+      rotBone(J, "LeftForeArm", (p.lel || 0) - .12, 0, 0);
+      rotBone(J, "RightForeArm", (p.rel || 0) - .12, 0, 0);
+      rotBone(J, "LeftUpLeg", p.lhx || 0, 0, 0);
+      rotBone(J, "RightUpLeg", p.rhx || 0, 0, 0);
+      rotBone(J, "LeftLeg", p.lkn || 0, 0, 0);
+      rotBone(J, "RightLeg", p.rkn || 0, 0, 0);
+      J.blushM.opacity = (p.blush || 0) * .75;
+      return;
+    }
     J.torso.rotation.set(p.tx || 0, p.ty || 0, p.tz || 0);
     J.head.rotation.set(p.hx || 0, p.hy || 0, p.hz || 0);
     J.lSh.rotation.set(p.lsx || 0, 0, (p.lsz || 0) + .07); J.rSh.rotation.set(p.rsx || 0, 0, (p.rsz || 0) - .07);
