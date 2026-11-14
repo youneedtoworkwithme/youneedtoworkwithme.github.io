@@ -5463,23 +5463,18 @@ function build3D(stage) {
       root.updateMatrixWorld(true);
       const bp = bones["mixamorig:Spine"] ? "mixamorig:" : "";
       const armOff = bp ? 1.18 : 0.52;
-      let skelH = 0, minY = 0;
+      let skelH = 0;
       const headEnd = bones[bp + "HeadTop_End"] || bones[bp + "Head"];
       const footB = bones[bp + "LeftFoot"] || bones[bp + "LeftLeg"];
       if (headEnd && footB) {
         const hv = new T.Vector3(), fv = new T.Vector3();
         headEnd.getWorldPosition(hv); footB.getWorldPosition(fv);
-        skelH = Math.abs(hv.y - fv.y) * 1.07;
-        minY = Math.min(hv.y, fv.y) - 0.07;
+        skelH = hv.distanceTo(fv) * 1.07;
       }
-      if (!skelH || skelH < 0.001) {
-        const box = new T.Box3().setFromObject(m);
-        skelH = box.max.y - box.min.y || 1.75;
-        minY = box.min.y;
-      }
-      const sc = targetH / skelH;
+      if (!skelH || skelH < 0.2) skelH = 1.7;
+      const sc = Math.max(0.5, Math.min(2.5, targetH / skelH));
       m.scale.setScalar(sc);
-      m.position.y = -minY * sc;
+      m.position.y = 0;
       root.updateMatrixWorld(true);
       const rest = {}, pq = {}, pqi = {};
       for (const k of ["Spine", "Spine1", "Neck", "Head", "LeftArm", "LeftForeArm", "RightArm", "RightForeArm", "LeftUpLeg", "LeftLeg", "RightUpLeg", "RightLeg"]) {
