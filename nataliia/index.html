@@ -55,7 +55,7 @@ h2{font-size:22px;font-weight:800;line-height:1.2}
 button,a.btn{font:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:10px}
 
-.brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--bg);padding-block:8px;margin-block:-8px}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding-block:8px;margin-block:-8px}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:16;background:var(--bg)}
 .home{display:flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 12px;font-weight:700;font-size:13px;white-space:nowrap}
 .home svg{width:16px;height:16px}
@@ -70,13 +70,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .screen{display:flex;flex-direction:column;gap:14px;animation:in .35s ease}
 @keyframes in{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion: reduce){.screen{animation:none}}
-.card{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.card{background:var(--surface);border:1px solid color-mix(in srgb,var(--ink) 7%,transparent);border-radius:22px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .head{display:flex;flex-direction:column;gap:4px}
 .head p{margin:0;color:var(--muted);font-size:14px}
 
 /* buttons */
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 14px;border-radius:14px;
-  border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-weight:700;font-size:14.5px;text-decoration:none;text-align:center}
+  border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-weight:700;font-size:14.5px;text-decoration:none;text-align:center;
+  transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease}
+.btn:active{transform:scale(.982)}
 .btn svg{width:18px;height:18px;flex:none}
 .btn.primary{background:var(--brand-ink);border-color:var(--brand-ink);color:#fff}
 .btn.next{background:var(--brand-ink);border-color:var(--brand-ink);color:#fff;justify-content:space-between;padding:10px 18px;min-height:64px;font-size:16px;box-shadow:0 10px 24px -12px rgba(184,67,28,.8)}
@@ -408,7 +410,7 @@ textarea{width:100%;min-height:76px;border:1.5px solid var(--line);border-radius
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .acts .btn.quizbtn{background:var(--surface-2);border-color:var(--brand)}}
 
 /* tab bar */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);
   padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));
   box-shadow:0 -8px 24px -16px rgba(0,0,0,.35)}
 .tabbar nav{max-width:460px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
@@ -542,32 +544,67 @@ textarea{width:100%;min-height:76px;border:1.5px solid var(--line);border-radius
         <div class="eyebrow" id="shopLine"></div>
         <h1 id="mName"></h1>
         <div class="role" id="mRole"></div>
+        <div class="live-pill"><i class="live-dot" aria-hidden="true"></i><span>На зв'язку · Рахунок за ~15 хв</span></div>
       </div>
       <div class="about" id="mAbout" hidden></div>
       <div class="quick" id="quick">
-        <div class="qh"><b>Скиньте список — підбір за хвилину</b><span>Фото, рахунок, Excel, PDF чи текст · рахунок від мене за 15 хв</span></div>
-        <div class="qbar">
+        <div class="qh"><b>Швидкий підбір і рахунок за 15 хв</b><span>Безкоштовно · ШІ підбере коди з прайсу, я перевірю</span></div>
+        <button type="button" class="btn primary qmain" id="qOwnBtn">📋 У мене є мій список (фото / файл / текст)</button>
+        <div class="qbar" id="qBar">
           <label class="qclip" title="Додати фото чи файли (до 20)" aria-label="Додати фото чи файли"><input type="file" id="qFile" multiple accept="image/*,application/pdf,.xlsx,.xls,.csv,.txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5 12.6 20a5.5 5.5 0 0 1-7.8-7.8l8.5-8.5a3.7 3.7 0 0 1 5.2 5.2L10 17.4a1.8 1.8 0 0 1-2.6-2.6l7.8-7.8"/></svg><i id="qCnt" hidden></i></label>
-          <textarea id="qText" rows="1" placeholder="Напишіть список…"></textarea>
+          <textarea id="qText" rows="1" placeholder="Вставте список або прикріпіть 📎 фото…"></textarea>
           <button type="button" class="qgo" id="qGo" aria-label="Отримати підбір"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
-        <div class="qnote" id="qFileT">Безкоштовно · ШІ підбере коди з прайсу, я перевірю і надішлю рахунок</div>
+        <div class="qmode" id="qModeBox" hidden>
+          <div class="qmode-h">⚠️ Як підібрати по вашому списку?</div>
+          <div class="qmodes" id="qModes" role="group" aria-label="Як підібрати товар">
+            <button type="button" class="qm" data-m="Тільки той самий товар/бренд (1 в 1)">🎯 Той самий товар</button>
+            <button type="button" class="qm on" data-m="Аналоги тієї ж якості (оптимально)">⚖️ Аналоги по якості</button>
+            <button type="button" class="qm" data-m="Дешевші аналоги (економ)">💰 Дешевше</button>
+            <button type="button" class="qm" data-m="Дорожчі/надійніші аналоги (преміум)">⭐ Краще / дорожче</button>
+          </div>
+        </div>
+        <div class="qsub">Або оберіть, що порахувати з нуля:</div>
+        <div class="qpresets" id="qPresets" role="group" aria-label="Швидкі шаблони запиту">
+          <button type="button" class="qpreset" data-tpl="Потрібен підбір на теплу підлогу (труба, колектор, підкладка) на ___ м²">🔥 Тепла підлога</button>
+          <button type="button" class="qpreset" data-tpl="Потрібен підбір на розводку води та каналізації (___ точок)">💧 Розводка води</button>
+          <button type="button" class="qpreset" data-tpl="Комплектація котельні під ключ (котел, бойлер, арматура) на ___ м²">⚡ Котельня</button>
+          <button type="button" class="qpreset qpreset-cmp" data-cmp="1">📄 Порівняти чужий рахунок</button>
+        </div>
+        <div class="qnote" id="qFileT">Доставка Пн/Ср/Пт · від 10 000 грн безкоштовно</div>
       </div>
       <style>
-        .quick{min-width:0;max-width:100%;box-sizing:border-box;margin:12px 0 4px;background:#fff;border:1.5px solid var(--brand,#F2673A);border-radius:16px;padding:10px 10px 8px;display:flex;flex-direction:column;gap:7px;text-align:left;box-shadow:0 6px 18px rgba(242,103,58,.12)}
-        .quick .qh{padding:0 4px}
-        .quick .qh b{display:block;font-size:15px;line-height:1.25;color:#1F1F1F}
-        .quick .qh span{display:block;font-size:12px;color:#6B6B6B;margin-top:1px}
-        .quick .qbar{min-width:0;display:flex;align-items:flex-end;gap:6px;background:#F5F4F2;border-radius:12px;padding:4px}
-        .quick textarea{flex:1 1 auto;width:auto;min-width:0;font:inherit;font-size:15px;line-height:1.35;padding:9px 4px;border:0;outline:0;background:transparent;color:#1F1F1F;resize:none;min-height:38px;max-height:120px;height:38px;box-shadow:none}
-        .quick .qclip,.quick .qgo{flex:0 0 38px;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;border:0}
-        .quick .qclip{background:#fff;color:#555;overflow:hidden}
+        .live-pill{display:inline-flex;align-items:center;gap:7px;margin-top:6px;padding:5px 12px;border-radius:999px;background:color-mix(in srgb,var(--ok) 13%,transparent);border:1px solid color-mix(in srgb,var(--ok) 32%,transparent);font-size:12px;font-weight:700;color:var(--ok);white-space:nowrap}
+        .live-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent);animation:lpulse 2s infinite}
+        @keyframes lpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+        .quick{min-width:0;max-width:100%;width:calc(100% - 20px);box-sizing:border-box;margin:10px auto 4px;background:var(--surface-2);border:1.5px solid var(--brand,#F2673A);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:8px;text-align:left;box-shadow:0 8px 22px -10px rgba(242,103,58,.28)}
+        .quick .qh{padding:0 2px}
+        .quick .qh b{display:block;font-size:15px;line-height:1.25;color:var(--ink)}
+        .quick .qh span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+        .quick .qbar{min-width:0;display:flex;align-items:flex-end;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:5px}
+        .quick textarea{flex:1 1 auto;width:100%;min-width:0;font:inherit;font-size:15px;line-height:1.4;padding:10px 6px;border:0;outline:0;background:transparent;color:var(--ink);resize:none;min-height:42px;max-height:132px;overflow-y:auto;box-shadow:none}
+        .quick .qclip,.quick .qgo{flex:0 0 40px;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;border:0;transition:transform .14s ease}
+        .quick .qclip:active,.quick .qgo:active{transform:scale(.94)}
+        .quick .qclip{background:var(--surface-2);color:var(--ink);overflow:hidden}
         .quick .qclip input{position:absolute;inset:0;opacity:0;cursor:pointer}
         .quick .qclip svg,.quick .qgo svg{width:19px;height:19px}
         .quick .qclip i{position:absolute;top:2px;right:2px;min-width:15px;height:15px;border-radius:8px;background:var(--brand,#F2673A);color:#fff;font:700 10px/15px "Open Sans",sans-serif;font-style:normal;text-align:center;padding:0 3px}
-        .quick .qgo{background:var(--brand,#F2673A);color:#fff}
+        .quick .qgo{background:var(--brand-ink);color:#fff}
         .quick .qgo:disabled{opacity:.6}
-        .quick .qnote{min-width:0;font-size:11.5px;color:#7A7A7A;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .qmain{width:100%;min-height:44px;font-size:14px;border-radius:12px}
+        .qsub{font-size:11.5px;font-weight:700;color:var(--muted);padding:2px 2px 0}
+        .qbar.pulse{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 25%,transparent)}
+        .qmode{background:var(--surface);border:1px dashed var(--brand);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+        .qmode-h{font-size:12px;font-weight:800;color:var(--brand-ink)}
+        .qmodes{display:flex;flex-wrap:wrap;gap:5px}
+        .qm{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:999px;padding:5px 9px;font-size:11.5px;font-weight:700;transition:all .12s ease}
+        .qm.on{background:var(--brand-ink);border-color:var(--brand-ink);color:#fff}
+        .qpresets{display:flex;flex-wrap:wrap;gap:6px}
+        .qpreset{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:700;line-height:1.2;transition:transform .12s ease,border-color .12s ease,background .12s ease}
+        .qpreset:hover,.qpreset.on{border-color:var(--brand);background:var(--surface-2);color:var(--brand-ink)}
+        .qpreset:active{transform:scale(.96)}
+        .qpreset-cmp{border-style:dashed;border-color:var(--brand);color:var(--brand-ink)}
+        .quick .qnote{min-width:0;font-size:11.5px;line-height:1.35;color:var(--muted);padding:0 2px}
         .raftec{margin-top:18px}
         .raftec .shop-h span{color:#777}
         .rgal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch}
@@ -579,17 +616,46 @@ textarea{width:100%;min-height:76px;border:1.5px solid var(--line);border-radius
       </style>
       <script>
       (function(){
-        var slug = (location.pathname.split('/').filter(Boolean)[0] || 'taras').toLowerCase();
+        var slug = (location.pathname.split('/').filter(Boolean)[0] || 'taras').toLowerCase().replace(/-v\d+$/, '');
         var APP = 'https://youneedtoworkwithme.github.io/aihotpoint/?m=' + encodeURIComponent(slug) + '&from=card';
         var f = document.getElementById('qFile'), t = document.getElementById('qText'), go = document.getElementById('qGo'), lab = document.getElementById('qFileT');
-        var cnt = document.getElementById('qCnt'), noteTxt = lab.textContent;
-        var grow = function(){ t.style.height = '38px'; t.style.height = Math.min(t.scrollHeight, 120) + 'px'; };
+        var cnt = document.getElementById('qCnt'), noteTxt = lab.textContent, mBox = document.getElementById('qModeBox');
+        var qModeVal = 'Аналоги тієї ж якості (оптимально)';
+        var grow = function(){ t.style.height = 'auto'; t.style.height = Math.min(t.scrollHeight, 132) + 'px'; };
+        var clearQuick = function(){ t.value = ''; grow(); document.querySelectorAll('.qpreset').forEach(function(x){ x.classList.remove('on'); }); };
         t.addEventListener('input', grow);
+        document.getElementById('qModes').addEventListener('click', function(e){
+          var b = e.target.closest('.qm'); if(!b) return;
+          document.querySelectorAll('#qModes .qm').forEach(function(x){ x.classList.remove('on'); });
+          b.classList.add('on'); qModeVal = b.dataset.m || qModeVal;
+        });
+        document.getElementById('qOwnBtn').addEventListener('click', function(){
+          clearQuick();
+          mBox.hidden = false;
+          var qb = document.getElementById('qBar');
+          qb.classList.add('pulse');
+          setTimeout(function(){ qb.classList.remove('pulse'); }, 1100);
+          t.focus();
+          lab.textContent = 'Оберіть варіант підбору вище, вставте текст або додайте 📎 фото/файл';
+        });
+        document.getElementById('qPresets').addEventListener('click', function(e){
+          var b = e.target.closest('.qpreset'); if(!b) return;
+          if(b.dataset.cmp){ clearQuick(); mBox.hidden = true; var cb = document.getElementById('cmpBtn'); if(cb) cb.click(); return; }
+          mBox.hidden = true;
+          document.querySelectorAll('.qpreset').forEach(function(x){ x.classList.remove('on'); });
+          b.classList.add('on');
+          t.value = b.dataset.tpl || '';
+          grow();
+          t.focus();
+          lab.textContent = 'Уточніть площу/кількість і натисніть → для миттєвого підбору';
+        });
         f.onchange = function(){ var n = Math.min(f.files.length, 20); cnt.hidden = !n; cnt.textContent = n;
+          if(n) mBox.hidden = false;
           lab.textContent = n ? '📎 ' + [].slice.call(f.files, 0, 3).map(function(x){ return x.name; }).join(', ') + (n > 3 ? ' +' + (n - 3) : '') : noteTxt; };
         go.onclick = function(){
           var files = [].slice.call(f.files || [], 0, 20), text = t.value.trim();
           if(!files.length && !text){ t.focus(); t.placeholder = 'Напишіть список або додайте 📎 фото'; return; }
+          if(!mBox.hidden && qModeVal){ text = (text ? text + '\n' : '') + '[Пріоритет підбору: ' + qModeVal + ']'; }
           go.disabled = true; lab.textContent = 'Відкриваю Hotpoint.ai…';
           var done = function(){ location.href = APP; };
           try{
@@ -622,7 +688,16 @@ textarea{width:100%;min-height:76px;border:1.5px solid var(--line);border-radius
             <div class="cmp-tag">Для нових клієнтів</div>
             <h3 id="cmpH">Порівняйте з вашим постачальником</h3>
             <p class="cmp-sub">Скиньте фото рахунку, який у Вас уже є. Я порахую ті самі позиції — і Ви побачите різницю.</p>
-            <ol class="cmp-steps"><li><b>Фото рахунку</b><span>від будь-якого постачальника</span></li><li><b>ШІ підбере аналоги</b><span>з нашого основного складу</span></li><li><b>Мій рахунок за 15 хв</b><span>точні ціни дає тільки менеджер</span></li></ol>
+            <ol class="cmp-steps"><li><b>Фото рахунку</b><span>від будь-якого постачальника</span></li><li><b>Оберіть як рахувати</b><span>1 в 1, аналоги чи дешевше</span></li><li><b>Мій рахунок за 15 хв</b><span>точні ціни дає тільки менеджер</span></li></ol>
+            <div class="qmode" id="cmpModeBox" style="margin-bottom:10px">
+              <div class="qmode-h">⚠️ Оберіть, як саме порівняти ваш рахунок:</div>
+              <div class="qmodes" id="cmpModes" role="group" aria-label="Режим порівняння рахунку">
+                <button type="button" class="qm" data-m="Тільки той самий товар/бренд (1 в 1)">🎯 Той самий товар</button>
+                <button type="button" class="qm on" data-m="Аналоги тієї ж якості (оптимально)">⚖️ Аналоги по якості</button>
+                <button type="button" class="qm" data-m="Дешевші аналоги (економ)">💰 Дешевше</button>
+                <button type="button" class="qm" data-m="Дорожчі/надійніші аналоги (преміум)">⭐ Краще / дорожче</button>
+              </div>
+            </div>
             <label class="btn primary cmp-up"><input type="file" id="cmpFile" multiple accept="image/*,application/pdf,.xlsx,.xls,.csv"><span id="cmpUpT">📷 Завантажити рахунок</span></label>
             <div class="cmp-or">або надішліть мені напряму</div>
             <div class="row2"><a class="btn viber" id="cmpViber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c5 0 9 3 9 8s-4 8-9 8c-1 0-2-.1-2.9-.4L5 21v-3.6C3.7 16 3 13.8 3 11c0-5 4-8 9-8z"/><path d="M9 8.5c0 3.5 3 6 6 6l1-1.5-2-1-1 .8c-1-.4-1.8-1.2-2.2-2.2l.8-1-1-2z"/></svg>Viber</a><a class="btn" id="cmpTg" target="_blank" rel="noopener">Telegram</a></div>
@@ -4534,14 +4609,26 @@ const cmpMsg = () => `Добрий день, ${CONFIG.vocative}! ${who()} Над
 $("viberBtn").onclick = () => viberGo(helloMsg(), $("meToast"));
 $("cmpViber").onclick = () => viberGo(cmpMsg(), $("meToast"));
 $("cmpTg").onclick = () => { copy(cmpMsg()).then(ok => ok && toast($("meToast"), "Текст скопійовано: вставте його в чат і додайте фото рахунку.")); };
-const cmpShow = open => { $("cmp").hidden = !open; $("cmpBtn").setAttribute("aria-expanded", open); document.documentElement.style.overflow = open ? "hidden" : ""; };
+const cmpShow = open => {
+  if (open) {
+    const qt = $("qText"); if (qt) { qt.value = ""; qt.style.height = "auto"; }
+    document.querySelectorAll(".qpreset").forEach(x => x.classList.remove("on"));
+  }
+  $("cmp").hidden = !open; $("cmpBtn").setAttribute("aria-expanded", open); document.documentElement.style.overflow = open ? "hidden" : "";
+};
+let cmpModeVal = "Аналоги тієї ж якості (оптимально)";
+if ($("cmpModes")) $("cmpModes").addEventListener("click", e => {
+  const b = e.target.closest(".qm"); if (!b) return;
+  document.querySelectorAll("#cmpModes .qm").forEach(x => x.classList.remove("on"));
+  b.classList.add("on"); cmpModeVal = b.dataset.m || cmpModeVal;
+});
 $("cmpBtn").onclick = () => cmpShow(true);
 $("cmpX").onclick = () => cmpShow(false);
 $("cmp").addEventListener("click", e => { if (e.target === $("cmp")) cmpShow(false); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("cmp").hidden) cmpShow(false); });
 $("cmpFile").onchange = () => { const fl = [...$("cmpFile").files].slice(0, 20); if (!fl.length) return;
   $("cmpUpT").textContent = "Відкриваю Hotpoint.ai…";
-  if (window.hpToApp) window.hpToApp("Порівняти з рахунком постачальника: підбери ті самі позиції або аналоги з нашого прайсу.", fl); };
+  if (window.hpToApp) window.hpToApp("Порівняти з рахунком постачальника. Пріоритет підбору: " + cmpModeVal, fl); };
 $("mReal").onclick = () => setMode("real"); $("mAi").onclick = () => setMode("ai");
 
 async function copy(text) {
